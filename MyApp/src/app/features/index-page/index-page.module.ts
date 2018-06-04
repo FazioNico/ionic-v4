@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { IndexPageComponent } from './containers/index-page/index-page.component
     IonicModule,
     IndexPageRoutingModule
   ],
-  declarations: [IndexPageComponent]
+  declarations: [IndexPageComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class IndexPageModule { }
