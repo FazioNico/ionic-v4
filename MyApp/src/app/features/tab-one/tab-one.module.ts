@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TabOneRoutingModule } from './tab-one-routing.module';
 import { TabOneComponent } from './containers/tab-one/tab-one.component';
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     IonicModule,
     TabOneRoutingModule
   ],
