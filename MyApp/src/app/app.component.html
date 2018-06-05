@@ -4,7 +4,14 @@
       <ion-menu>
         <ion-header>
           <ion-toolbar color="primary">
-            <ion-title>Menu</ion-title>
+            <ion-buttons slot="end">
+              <ion-menu-toggle>
+                <ion-button (click)="menuClose()">
+                  <ion-icon slot="icon-only" name="close"></ion-icon>
+                </ion-button>
+              </ion-menu-toggle>
+            </ion-buttons> 
+            <ion-title  >Menu</ion-title>
           </ion-toolbar>
         </ion-header>
       </ion-menu>
@@ -16,3 +23,4 @@
     </ion-split-pane>
 
 </ion-app>
+<ion-menu-controller></ion-menu-controller>
