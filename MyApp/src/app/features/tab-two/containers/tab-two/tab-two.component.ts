@@ -11,14 +11,14 @@ export class TabTwoComponent implements OnInit {
 
   public posts$: Observable<any[]>;
 
-  constructor(public http: GenericHttpService) { }
+  constructor(private _http: GenericHttpService) { }
 
   ngOnInit() {
     this.loadPosts();
   }
 
   loadPosts(): void {
-    this.posts$ = this.http.get('fakeApi', '/posts');
+    this.posts$ = this._http.get('fakeApi', '/posts');
   }
 
   goPost(post): void {
