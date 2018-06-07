@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    loadChildren: './features/detail/detail.module#DetailModule'
+    loadChildren: '../detail/detail.module#DetailModule'
   },
   {
     path: '',
