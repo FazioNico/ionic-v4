@@ -19,12 +19,13 @@ export class TabOneComponent implements OnInit {
   }
 
   async getCurrentPosition(): Promise<Observable<GeolocationPosition|Error>> {
+
     const isAvailable: boolean = Capacitor.isPluginAvailable('Geolocation');
     if (!isAvailable) {
       console.log('Err: plugin not available');
       return of(new Error('Err: plugin not available'));
     }
-    return this.coordinates$ = fromPromise(Geolocation.getCurrentPosition());
+    return this.coordinates$ = fromPromise(Plugins.Geolocation.getCurrentPosition());
   }
 
   async show() {
