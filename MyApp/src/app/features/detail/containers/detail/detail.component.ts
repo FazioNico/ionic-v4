@@ -25,6 +25,6 @@ export class DetailComponent implements OnInit {
   }
 
   back() {
-    this._router.navigate(['']);
+    this._router.navigate([{outlet: 'two'}]);
   }
 }
