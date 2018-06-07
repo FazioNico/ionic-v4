@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { GenericHttpService } from '../../../../shared/services/generic-http/generic-http.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -8,19 +10,21 @@ import { Location } from '@angular/common';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  public post: any;
+  public post$: Observable<any>;
 
   constructor(
     private _route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private _http: GenericHttpService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this._route.snapshot.queryParams);
-    this.post = this._route.snapshot.queryParams;
+    console.log(this._route.snapshot.params.id);
+    this.post$ = this._http.get('fakeApi', '/posts/' + this._route.snapshot.params.id);
   }
 
   back() {
-    this._location.back();
+    this._router.navigate(['']);
   }
 }

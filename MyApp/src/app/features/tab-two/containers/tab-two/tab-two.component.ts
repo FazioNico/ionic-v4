@@ -14,7 +14,7 @@ export class TabTwoComponent implements OnInit {
 
   constructor(
     private _http: GenericHttpService,
-    private _router: Router
+    private _router: Router,
   ) { }
 
   ngOnInit() {
@@ -27,6 +27,6 @@ export class TabTwoComponent implements OnInit {
 
   goPost(post): void {
     console.log('::: Go to post detail', post);
-    this._router.navigate(['posts', post.id], {queryParams: post});
+    this._router.navigate(['posts', post.id]);
   }
 }

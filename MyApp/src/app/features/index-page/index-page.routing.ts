@@ -25,6 +25,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'posts',
+    loadChildren: './features/detail/detail.module#DetailModule'
+  },
+  {
     path: '',
     redirectTo: '/tabs/(one:one)'
   }

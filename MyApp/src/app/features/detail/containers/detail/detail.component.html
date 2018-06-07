@@ -11,8 +11,7 @@
 
 <ion-content padding-top>
  
-
-  <ion-item text-wrap>
+  <ion-item text-wrap *ngIf="(post$|async) as post;else noPost">
     <ion-label>
       <ion-text color="primary">
         <h2>{{post?.title}}</h2>
@@ -20,5 +19,5 @@
       <p margin-top>{{post?.body}}</p>
     </ion-label>
   </ion-item>
-
+  <ng-template #noPost>...loading </ng-template>
 </ion-content>
