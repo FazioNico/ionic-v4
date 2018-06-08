@@ -24,12 +24,14 @@ export class TabOneComponent implements OnInit {
     .then((loader: any) => {
       // get position
       return this.getCurrentPosition()
-        // finaly dismiss() loader if position exist
         .then(position => {
+          // fermer loader + return position
           loader.dismiss();
           return position;
         })
+        // if error
         .catch(err => {
+          // fermer loader + return NULL
           loader.dismiss();
           return null;
         });
