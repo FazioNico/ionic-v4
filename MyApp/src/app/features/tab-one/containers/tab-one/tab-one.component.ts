@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Capacitor, Plugins, GeolocationPosition } from '@capacitor/core';
 import { Observable, of, from as fromPromise} from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 const { Toast, Geolocation } = Capacitor.Plugins;
 
@@ -15,26 +16,41 @@ export class TabOneComponent implements OnInit {
   public coordinates$: Observable<GeolocationPosition>;
   public defaultPos = {latitude: 42, longitude: 2};
 
-  constructor() { }
+  constructor(private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     // demarer le loader....
-    this.getCurrentPosition()
-      .then(_ => {
-        // dismiss loader
-      });
+    this.displayLoader()
+    .then((loader: any) => {
+      // get position
+      return this.getCurrentPosition()
+        // finaly dismiss() loader if position exist
+        .then(position => (position) ? loader.dismiss() : null);
+    })
+    // do not forget to handle promise rejection
+    .catch(err => console.log(err));
   }
 
-  async getCurrentPosition(): Promise<Observable<GeolocationPosition|Error>> {
+  async displayLoader() {
+    const loading = await this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 2000
+    });
+    loading.present();
+    return await loading;
+  }
+  async getCurrentPosition(): Promise<any> {
     const isAvailable: boolean = Capacitor.isPluginAvailable('Geolocation');
     if (!isAvailable) {
       console.log('Err: plugin not available');
       return of(new Error('Err: plugin not available'));
     }
-    return this.coordinates$ = fromPromise(Plugins.Geolocation.getCurrentPosition()).pipe(
+    const POSITION = Plugins.Geolocation.getCurrentPosition();
+    this.coordinates$ = fromPromise(POSITION).pipe(
       switchMap((data: any) => of(data.coords)),
       tap(data => console.log(data))
     );
+    return POSITION;
   }
 
   async show() {
