@@ -34,7 +34,6 @@ export class TabOneComponent implements OnInit {
   async displayLoader() {
     const loading = await this.loadingCtrl.create({
       content: 'Please wait...',
-      duration: 2000
     });
     await loading.present();
     return  loading;
