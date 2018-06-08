@@ -36,8 +36,8 @@ export class TabOneComponent implements OnInit {
       content: 'Please wait...',
       duration: 2000
     });
-    loading.present();
-    return await loading;
+    await loading.present();
+    return  loading;
   }
   async getCurrentPosition(): Promise<any> {
     const isAvailable: boolean = Capacitor.isPluginAvailable('Geolocation');
