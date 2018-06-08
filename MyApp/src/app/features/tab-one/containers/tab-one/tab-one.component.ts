@@ -25,8 +25,14 @@ export class TabOneComponent implements OnInit {
       // get position
       return this.getCurrentPosition()
         // finaly dismiss() loader if position exist
-        .then(position => (position) ? loader.dismiss() : null)
-        .catch(err => loader.dismiss());
+        .then(position => {
+          loader.dismiss();
+          return position;
+        })
+        .catch(err => {
+          loader.dismiss();
+          return null;
+        });
     })
     .then(position => (!position) ? alert('Capacitor not work. Geoposition unavailable') : null)
     // do not forget to handle promise rejection
