@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Capacitor, Plugins, GeolocationPosition } from '@capacitor/core';
 import { Observable, of, from as fromPromise} from 'rxjs';
+import { tap, map, switchMap } from 'rxjs/operators';
 
 const { Toast, Geolocation } = Capacitor.Plugins;
 
@@ -12,20 +13,28 @@ const { Toast, Geolocation } = Capacitor.Plugins;
 export class TabOneComponent implements OnInit {
 
   public coordinates$: Observable<GeolocationPosition>;
+  public defaultPos = {latitude: 42, longitude: 2};
+
   constructor() { }
 
   ngOnInit() {
-    this.getCurrentPosition();
+    // demarer le loader....
+    this.getCurrentPosition()
+      .then(_ => {
+        // dismiss loader
+      });
   }
 
   async getCurrentPosition(): Promise<Observable<GeolocationPosition|Error>> {
-
     const isAvailable: boolean = Capacitor.isPluginAvailable('Geolocation');
     if (!isAvailable) {
       console.log('Err: plugin not available');
       return of(new Error('Err: plugin not available'));
     }
-    return this.coordinates$ = fromPromise(Plugins.Geolocation.getCurrentPosition());
+    return this.coordinates$ = fromPromise(Plugins.Geolocation.getCurrentPosition()).pipe(
+      switchMap((data: any) => of(data.coords)),
+      tap(data => console.log(data))
+    );
   }
 
   async show() {
