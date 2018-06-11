@@ -13,7 +13,11 @@
 
 <ion-content padding>
   <p>Tab Three work!</p>
-  <pre>
-      {{ (motionDatas | async) | json }}
-  </pre>
+  <div *ngIf="(motionDatas | async) as datas">
+      <pre>
+        {{ datas?.alpha}}
+        {{ datas?.beta}}
+        {{ datas?.gamma}}
+      </pre>
+  </div>
 </ion-content>
