@@ -3,9 +3,11 @@ import { Capacitor, Plugins, GeolocationPosition } from '@capacitor/core';
 import { of, Observable } from 'rxjs';
 // import custom plugin
 import { MotionPWA, IMotionPWADatasOptions } from '../../../../../plugins/motion/pwa/motion-pwa.plugin';
+import { CameraPWA } from '../../../../../plugins/camera/pwa/camera-pwa.plugin';
 
 // Instantiate custom plugin
 const motionPWA = new MotionPWA();
+const cameraPWA = new CameraPWA('app-tab-three');
 
 const { Motion, Toast } = Capacitor.Plugins;
 
@@ -51,4 +53,12 @@ export class TabThreeComponent implements OnInit {
     });
   }
 
+  async startCamera() {
+    await cameraPWA.start();
+    this.savePicture();
+  }
+
+  savePicture() {
+    console.log('picture saved!');
+  }
 }
