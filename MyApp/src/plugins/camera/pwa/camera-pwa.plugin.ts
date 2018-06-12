@@ -18,7 +18,7 @@ export class CameraPWA extends WebPlugin {
     }
     // sytaxe par defaut pour la definition d'un plugin
     super({
-      name: 'CameraPWA',
+      name: 'Camera',
       platforms: ['web']
     });
     this.HTMLSelector = HTMLSelector;
