@@ -1,6 +1,0 @@
-{
-  "appId": "ch.nomades.faziodemoapp",
-  "appName": "MyAppNomadesDemo",
-  "bundledWebRuntime": false,
-  "webDir": "www"
-}
