@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 cp ./MyApp/.htaccess ./MyApp/www/.htaccess
+cp ./MyApp/.nojekyll ./MyApp/www/.nojekyll
 git add -f ./MyApp/www
 git add --all
 git commit --allow-empty -m 'Update version [ci skip]'
